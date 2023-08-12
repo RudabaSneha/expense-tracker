@@ -2,7 +2,7 @@
 
 This is an app to track monthly expenses. It moves user inputs to a csv file which then moves the information to a google sheets. The csv could also be linked to an excel document.(Note~ this is a very basic app)
 
-![terminal output](terminal.png)   ![google sheets entry](sheets.png)
+![sheets](sheets-1.png)  ![terminal output](terminal-1.png)
 
 
 ## Use
