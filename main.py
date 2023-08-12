@@ -2,7 +2,7 @@ from tracker import Expense
 import calendar
 import datetime
 def main():
-    budget = float(input('what is your monthly budget?'))
+    budget = float(input('what is your monthly budget? '))
     print(f"Expense tracker")
     expense_file_path = "expenses.csv"
     
@@ -15,12 +15,12 @@ def main():
     summarize_expenses(expense_file_path, budget)
     
 def get_expense():
-    purchase = input('Enter purhcase ')
-    amount = float(input('How much was it? '))
+    purchase = input('Enter item: ')
+    amount = float(input('Enter item price: '))
   
   
     categories = [
-        'food', 'entertainment', 'clothes', 'bills', 'home', 'other'
+        'food/drink', 'entertainment', 'personal', 'car', 'bills', 'insurance', 'home', 'other'
         ]
     
     while True:
@@ -48,7 +48,7 @@ def get_expense():
 def transfer_data(expense: Expense, expense_file_path):
     print(f"transferring expense {expense} to {expense_file_path}")
     with open(expense_file_path, "a") as file:
-        file.write(f"{expense.name}, {expense.type}, {expense.price}\n")
+        file.write(f"{expense.name}, {expense.type},{expense.price}\n")
 
 def summarize_expenses(expense_file_path, budget):
     print("summarizing your expenses")
@@ -57,7 +57,7 @@ def summarize_expenses(expense_file_path, budget):
         lines = file.readlines()
         for line in lines:
             purchase,categories,amount = line.strip().split(",")
-            line_expense = Expense(name=purchase, price=float(amount),type=categories)
+            line_expense = Expense(name=purchase,type=categories, price=float(amount))
             
             
             expenses.append(line_expense)
@@ -77,10 +77,10 @@ def summarize_expenses(expense_file_path, budget):
         print(f"  {key}:  ${price:.2f}")
         
     total_spent = sum([i.price for i in expenses])
-    print(blue(f'Money spent ${total_spent:.2f} this month'))
+    print(blue(f'Money spent this month: ${total_spent:.2f} '))
 
     remaining_budget = budget - total_spent
-    print(f'Budget Remaining ${remaining_budget:.2f}')
+    print(f'Budget Remaining: ${remaining_budget:.2f}')
     
     now = datetime.datetime.now()
     days_in_month = calendar.monthrange(now.year, now.month)[1]
